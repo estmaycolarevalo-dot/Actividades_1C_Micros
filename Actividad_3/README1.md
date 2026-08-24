@@ -1,22 +1,30 @@
-# Actividad 3: Chatbot Domótico e Integración con YOLO
+# Actividad 3: Chatbot Domótico con Control por Voz (ESP32)
 
 ## 1. Descripción del Proyecto
-Implementación de un chatbot domótico accionado por comandos de voz e integración con la arquitectura de visión por computador YOLO para el control del encendido y apagado de LEDs en una ESP32.
+Este proyecto implementa un chatbot domótico accionado por comandos de voz capaz de interpretar instrucciones verbales y enviar comandos a una placa ESP32 para controlar el encendido y apagado de un LED.
+
+---
 
 ## 2. Puntos Desarrollados
-* **Control por Voz:** Integración del chatbot para procesamiento de instrucciones domóticas.
-* **Detección Visual (YOLO):**
-  * **Carro de juguete:** Al ser detectado por la cámara, activa el **LED Rojo**.
-  * **Moto de juguete:** Al ser detectada por la cámara, activa el **LED Verde**.
-* **ESP32:** Control de salidas GPIO a través de peticiones enviadas desde el script principal.
+* **Reconocimiento de Voz y Chatbot:** Procesamiento de audio en tiempo real para interpretar comandos domóticos (como encender o apagar dispositivos).
+* **Control de Salidas (ESP32):** Recepción de peticiones y control del estado del pin GPIO donde está conectado el LED.
+* **Integración del Sistema:** Enlace entre el script principal en Python (Chatbot) y la ESP32 mediante peticiones en red local / comunicación serial.
 
-## 3. Diagrama de Conexión y Wokwi
-* **LED Rojo:** Conectado al GPIO 12.
-* **LED Verde:** Conectado al GPIO 14.
-* **Enlace al circuito interactivo:** [Insertar Link de Wokwi si aplica]
+---
+
+## 3. Diagrama de Conexión
+* **LED:** Conectado a una salida digital (GPIO) de la ESP32 con su respectiva resistencia de protección a GND.
+<img width="536" height="645" alt="image" src="https://github.com/user-attachments/assets/6e1b1a9e-4b89-4e0b-a0a8-6481d08e97a3" />
+
+
+https://github.com/user-attachments/assets/8c853a81-4212-43c4-a05a-69172da969ed
+
+
+---
 
 ## 4. Instrucciones de Ejecución
-1. Cargar el firmware/script en la ESP32.
-2. Ejecutar el detector y chatbot:
+1. Cargar el firmware/script de control en la placa ESP32.
+2. Asegurar la conexión a la misma red o puerto de comunicación.
+3. Ejecutar el script principal del chatbot domótico:
    ```bash
    python chatbot_voz.py
