@@ -153,22 +153,8 @@ Durante el desarrollo se presentaron varios problemas reales de integración har
 | `pyaudio` fallaba al instalar, pidiendo un compilador de C++ | El entorno virtual usaba Python 3.14, una versión demasiado nueva sin wheels precompilados disponibles para esa librería en Windows | Se recreó el entorno virtual con Python 3.12, que sí cuenta con wheels precompilados para todas las dependencias. |
 | El MPU6050 dejó de responder por completo en el bus I2C | Pruebas de aislamiento (con solo el MPU6050 conectado, sin el OLED) confirmaron que el sensor no respondía bajo ninguna configuración de cableado válida | Se determinó que el sensor sufrió una falla de hardware. Ver sección 11 para el manejo de este caso en el código. |
 
-## 8. Estructura del repositorio
 
-```
-sotano-inteligente/
-├── README.md
-├── docs/
-│   └── arquitectura.svg
-├── esp32/
-│   ├── main.py                 # Programa principal que corre en el ESP32
-│   ├── ssd1306.py               # Driver de la pantalla OLED
-│   └── diagnostico_i2c.py       # Script de diagnóstico del bus I2C
-└── pc/
-    └── voz_control_pc.py        # Control por voz desde la PC
-```
-
-## 9. Instalación y puesta en marcha
+## 8. Instalación y puesta en marcha
 
 ### En el ESP32 (Thonny)
 1. Flashear MicroPython en el ESP32 (si no lo tiene ya).
@@ -193,7 +179,7 @@ sotano-inteligente/
    python pc/voz_control_pc.py
    ```
 
-## 10. Comandos de voz disponibles
+## 9. Comandos de voz disponibles
 
 | Frase | Acción |
 |---|---|
@@ -205,7 +191,7 @@ sotano-inteligente/
 | "luz apagada" / "apagar luz" | Apaga la luz (manual) |
 | "luz automática" / "modo automático" | Devuelve el control de la luz al sensor PIR |
 
-## 11. Estado actual del MPU6050
+## 10. Estado actual del MPU6050
 
 El requisito de "OLED con alerta temprana sísmica" está **completamente implementado en el código** (`esp32/main.py`, funciones `leer_accel()` y `magnitud_vibracion()`), y fue validado funcionalmente durante el desarrollo: el sistema detectaba correctamente vibraciones simuladas (golpes suaves sobre la mesa de montaje) y mostraba la alerta en el OLED junto con el parpadeo del LED rojo, tal como se describe en la sección 5.
 
@@ -224,7 +210,7 @@ except OSError:
 
 Si el sensor no responde al iniciar, el sistema continúa funcionando con normalidad (ventana, iluminación, PIR, OLED), mostrando el aviso `(MPU6050 offline)` en pantalla en vez de fallar. **En cuanto se conecte un MPU6050 en buen estado, el sistema lo detecta automáticamente sin requerir ningún cambio de código**, activando de nuevo la función de alerta sísmica.
 
-## 12. Conclusiones y mejoras futuras
+## 11. Conclusiones y mejoras futuras
 
 El proyecto permitió integrar múltiples protocolos de comunicación (I2C, PWM, UART/Serial) sobre un mismo microcontrolador, así como resolver problemas reales de integración hardware/software documentados en la sección 7 — experiencia que refleja el tipo de depuración que ocurre en proyectos de sistemas embebidos reales, más allá del código en sí.
 
@@ -233,3 +219,5 @@ El proyecto permitió integrar múltiples protocolos de comunicación (I2C, PWM,
 - Registro histórico de eventos (movimiento, sismos) en una tarjeta SD o servidor remoto.
 - Interfaz web local para monitorear el sistema sin necesidad de la app de voz.
 - Sensor de luz ambiental (LDR) para ajustar la iluminación según la luz natural disponible.
+
+<img width="1076" height="651" alt="image" src="https://github.com/user-attachments/assets/33810777-ef85-49aa-81c9-698396f14c6e" />
