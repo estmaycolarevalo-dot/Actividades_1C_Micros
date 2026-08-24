@@ -4,6 +4,7 @@
 * [Ver Proyecto y Circuito Interactivo en Wokwi](https://wokwi.com/projects/473196769659239425)
 
 ---
+<img width="882" height="801" alt="image" src="https://github.com/user-attachments/assets/df999192-c36d-4c30-a2d4-ad6d7ce769c8" />
 
 ## 1. Código de Control en MicroPython
 
@@ -52,6 +53,8 @@ El firmware cargado en la ESP32 lee continuamente la señal recibida (simulada p
 * Al recibir el evento de **Carro**, la ESP32 conmuta la salida del GPIO 4 a nivel alto (3.3V), encendiendo el **LED Rojo**.
 * Al recibir el evento de **Moto**, conmuta la salida del GPIO 2 a nivel alto, encendiendo el **LED Verde**.
 * Si la clase no corresponde o finaliza la detección, las salidas retornan a cero lógico.
+<img width="1080" height="1266" alt="image" src="https://github.com/user-attachments/assets/3f6e2305-d5ec-4331-aa4a-390617755176" />
+<img width="938" height="1254" alt="image" src="https://github.com/user-attachments/assets/b3e94846-ee8f-4fd0-81c1-787a428d2ad3" />
 
 
 
