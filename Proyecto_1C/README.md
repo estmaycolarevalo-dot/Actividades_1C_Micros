@@ -5,7 +5,8 @@
 
 Sistema de automatización para un sótano, construido sobre un **ESP32** programado en **MicroPython**, con control manual por **voz desde una PC** (Python + reconocimiento de voz). Integra apertura de ventana, iluminación de varias intensidades, detección de movimiento y alerta temprana sísmica.
 
-![Arquitectura del sistema](docs/arquitectura.svg)
+![Arquitectura del sistema](<img width="1076" height="651" alt="image" src="https://github.com/user-attachments/assets/33810777-ef85-49aa-81c9-698396f14c6e" />
+)
 
 ---
 
@@ -216,5 +217,3 @@ El proyecto permitió integrar múltiples protocolos de comunicación (I2C, PWM,
 - Registro histórico de eventos (movimiento, sismos) en una tarjeta SD o servidor remoto.
 - Interfaz web local para monitorear el sistema sin necesidad de la app de voz.
 - Sensor de luz ambiental (LDR) para ajustar la iluminación según la luz natural disponible.
-
-<img width="1076" height="651" alt="image" src="https://github.com/user-attachments/assets/33810777-ef85-49aa-81c9-698396f14c6e" />
