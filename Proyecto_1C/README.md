@@ -1,5 +1,3 @@
-[README.md](https://github.com/user-attachments/files/31368575/README.md)
-
 # 🏠 Sótano Inteligente — Sistema IoT con ESP32
 
 **Reto propuesto:** Sótano Inteligente
@@ -20,11 +18,10 @@ Sistema de automatización para un sótano, construido sobre un **ESP32** progra
 - [5. Explicación del funcionamiento](#5-explicación-del-funcionamiento)
 - [6. Tecnologías utilizadas](#6-tecnologías-utilizadas)
 - [7. Problemas encontrados y soluciones](#7-problemas-encontrados-y-soluciones)
-- [8. Estructura del repositorio](#8-estructura-del-repositorio)
-- [9. Instalación y puesta en marcha](#9-instalación-y-puesta-en-marcha)
-- [10. Comandos de voz disponibles](#10-comandos-de-voz-disponibles)
-- [11. Estado actual del MPU6050](#11-estado-actual-del-mpu6050)
-- [12. Conclusiones y mejoras futuras](#12-conclusiones-y-mejoras-futuras)
+- [8. Instalación y puesta en marcha](#9-instalación-y-puesta-en-marcha)
+- [9. Comandos de voz disponibles](#10-comandos-de-voz-disponibles)
+- [10. Estado actual del MPU6050](#11-estado-actual-del-mpu6050)
+- [11. Conclusiones y mejoras futuras](#12-conclusiones-y-mejoras-futuras)
 
 ---
 
