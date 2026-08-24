@@ -1,3 +1,4 @@
+# Integrantes Daniel Montaño 7004609 y Maycol Arévalo 7004612
 # 🏠 Sótano Inteligente — Sistema IoT con ESP32
 
 **Reto propuesto:** Sótano Inteligente
