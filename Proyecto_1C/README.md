@@ -49,8 +49,6 @@ El sistema se dividió en dos nodos que se comunican por **puerto serial (USB)**
 1. **Nodo ESP32 (embebido)** — corre `esp32/main.py` en MicroPython. Es el controlador central: lee los sensores en un ciclo continuo (~10 veces por segundo), toma decisiones automáticas (luz por PIR, alarma por MPU6050), y ejecuta los comandos manuales que le llegan por serial (ventana, override de luz).
 2. **Nodo PC (control por voz)** — corre `pc/voz_control_pc.py` en Python estándar. Captura audio del micrófono, lo transcribe a texto con la API de reconocimiento de voz de Google, interpreta el comando, y lo envía como un código corto (ej. `W1`, `L3`) por el puerto serial hacia el ESP32.
 
-Ver el diagrama completo en [`docs/arquitectura.svg`](docs/arquitectura.svg).
-
 ### 2.3 Protocolo de comunicación (diseño de mensajes)
 
 Se diseñó un protocolo de texto simple, un comando por línea (terminado en `\n`), para minimizar la complejidad de parseo en MicroPython:
