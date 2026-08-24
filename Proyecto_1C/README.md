@@ -209,6 +209,10 @@ except OSError:
 
 Si el sensor no responde al iniciar, el sistema continúa funcionando con normalidad (ventana, iluminación, PIR, OLED), mostrando el aviso `(MPU6050 offline)` en pantalla en vez de fallar. **En cuanto se conecte un MPU6050 en buen estado, el sistema lo detecta automáticamente sin requerir ningún cambio de código**, activando de nuevo la función de alerta sísmica.
 
+
+https://github.com/user-attachments/assets/b0872874-7de9-40fc-a605-ea8f70bc23fb
+
+
 ## 11. Conclusiones y mejoras futuras
 
 El proyecto permitió integrar múltiples protocolos de comunicación (I2C, PWM, UART/Serial) sobre un mismo microcontrolador, así como resolver problemas reales de integración hardware/software documentados en la sección 7 — experiencia que refleja el tipo de depuración que ocurre en proyectos de sistemas embebidos reales, más allá del código en sí.
