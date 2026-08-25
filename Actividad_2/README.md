@@ -42,17 +42,25 @@ YOLO (*You Only Look Once*) es un algoritmo de detección de objetos en tiempo r
 
 ## 3. Integración Paso a Paso con la Detección de Vehículos
 
-* **Paso 1: Configuración del Circuito en Wokwi**
-Se conectan las salidas digitales a las resistencias de limitación de corriente para encender el **LED Rojo en GPIO 4** y el **LED Verde en GPIO 2**. Las entradas digitales en **GPIO 34** y **GPIO 35** reciben la señal lógica de los eventos de clasificación.
-* **Paso 2: Entrenamiento / Selección del Modelo YOLO**
-Se toma un modelo YOLO entrenado con el dataset COCO (el cual ya incluye las clases `car` y `motorbike` por defecto) o un dataset personalizado de juguetes mediante supervisión de etiquetas.
-* **Paso 3: Canal de Comunicación con el Embebido**
-Dado que ejecutar una red convolucional compleja como YOLO directamente en el microcontrolador desborda la SRAM de la ESP32, el procesamiento de visión se realiza en una computadora host mediante Python/OpenCV. Al detectar el objeto `car` o `motorbike`, el script envía una señal de bandera por puerto serie (UART) a la ESP32.
-* **Paso 4: Evaluación de Condicionales en MicroPython**
-El firmware cargado en la ESP32 lee continuamente la señal recibida (simulada por hardware mediante los pulsadores de la imagen):
-* Al recibir el evento de **Carro**, la ESP32 conmuta la salida del GPIO 4 a nivel alto (3.3V), encendiendo el **LED Rojo**.
-* Al recibir el evento de **Moto**, conmuta la salida del GPIO 2 a nivel alto, encendiendo el **LED Verde**.
-* Si la clase no corresponde o finaliza la detección, las salidas retornan a cero lógico.
+* **Paso 1: Configuración del Circuito en la ESP32**
+  Se configuraron dos salidas digitales para el control de los indicadores lumínicos: el **LED Rojo en el GPIO 18** (para la detección de carros) y el **LED Verde en el GPIO 4** (para la detección de motos). Ambas salidas inician en nivel bajo (`LOW`) y se comunican con el computador mediante el puerto serie a una tasa de **115200 baudios**.
+
+* **Paso 2: Procesamiento Visual con YOLOv8 en el Host**
+  Dado que la ejecución directa de redes neuronales convolucionales complejas excede la capacidad de cómputo del microcontrolador, la captura de video en tiempo real y la inferencia se ejecutan en la máquina host mediante Python, OpenCV y la librería `ultralytics` cargando el modelo preentrenado `yolov8n.pt`.
+
+* **Paso 3: Protocolo de Comunicación Serial (UART)**
+  El script en Python evalúa los objetos detectados por la cámara con un umbral de confianza superior al 50% (`conf > 0.50`):
+  * Si la clase detectada es `car`, asigna la bandera `"CARRO"`.
+  * Si la clase detectada es `motorcycle` o `motorbike`, asigna la bandera `"MOTO"`.
+  * Si no se detectan vehículos de interés, asigna la bandera `"NONE"`.
+  
+  Esta instrucción se transmite a la ESP32 a través de `pyserial` codificada en bytes finalizando con salto de línea (por ejemplo, `b'CARRO\n'`).
+
+* **Paso 4: Evaluación de Comandos en el Firmware de la ESP32**
+  El firmware desarrollado en C++ lee continuamente el puerto serie mediante la función `Serial.readStringUntil('\n')`:
+  * Al recibir la cadena `"CARRO"`, conmuta el **GPIO 18 (LED Rojo) a nivel alto (`HIGH`)** y el GPIO 4 a nivel bajo (`LOW`).
+  * Al recibir la cadena `"MOTO"`, conmuta el **GPIO 4 (LED Verde) a nivel alto (`HIGH`)** y el GPIO 18 a nivel bajo (`LOW`).
+  * Ante la ausencia de estos eventos (`"NONE"` u otro valor), conmuta ambos pines a nivel bajo (`LOW`), apagando los indicadores.
 <img width="1080" height="1266" alt="image" src="https://github.com/user-attachments/assets/3f6e2305-d5ec-4331-aa4a-390617755176" />
 <img width="938" height="1254" alt="image" src="https://github.com/user-attachments/assets/b3e94846-ee8f-4fd0-81c1-787a428d2ad3" />
 
