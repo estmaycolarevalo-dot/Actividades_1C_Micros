@@ -1,0 +1,31 @@
+#define LED_ROJO 18   // GPIO 18
+#define LED_VERDE 4   // GPIO 4
+
+void setup() {
+  Serial.begin(115200);
+  pinMode(LED_ROJO, OUTPUT);
+  pinMode(LED_VERDE, OUTPUT);
+  
+  digitalWrite(LED_ROJO, LOW);
+  digitalWrite(LED_VERDE, LOW);
+}
+
+void loop() {
+  if (Serial.available() > 0) {
+    String comando = Serial.readStringUntil('\n');
+    comando.trim();
+
+    if (comando == "CARRO") {
+      digitalWrite(LED_ROJO, HIGH);
+      digitalWrite(LED_VERDE, LOW);
+    } 
+    else if (comando == "MOTO") {
+      digitalWrite(LED_ROJO, LOW);
+      digitalWrite(LED_VERDE, HIGH);
+    } 
+    else {
+      digitalWrite(LED_ROJO, LOW);
+      digitalWrite(LED_VERDE, LOW);
+    }
+  }
+}
